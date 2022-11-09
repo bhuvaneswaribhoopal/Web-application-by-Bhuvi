@@ -5,6 +5,7 @@ maven "maven3.8.6"
 }
 options {
   buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '2', numToKeepStr: '5')
+timestamps()
 }
 
 stages{
