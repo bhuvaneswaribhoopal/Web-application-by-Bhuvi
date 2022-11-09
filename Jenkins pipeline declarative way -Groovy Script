@@ -6,6 +6,7 @@ maven "maven3.8.6"
 stages{
 stage('CheckoutCode'){
 steps{
+sendslacknotifications("STARTED")
 git credentialsId: '3ea332bc-18e0-48a4-a580-fe3bf8f97850', url: 'https://github.com/bhuvaneswaribhoopal/Web-application-by-Bhuvi.git'
 }
 } 
