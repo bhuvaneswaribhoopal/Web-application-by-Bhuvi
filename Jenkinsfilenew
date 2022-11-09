@@ -1,0 +1,25 @@
+node{
+echo "Build number: ${env.BUILD_NUMBER}"
+echo "Job name is : ${env.JOB_NAME}"
+echo "Node name is : ${env.NODE_NAME}"
+def mavenHome = tool name:"maven3.8.6"
+stage('CheckoutCode'){
+git credentialsId: '3ea332bc-18e0-48a4-a580-fe3bf8f97850', url: 'https://github.com/bhuvaneswaribhoopal/Web-application-by-Bhuvi.git'
+}
+stage ('Build'){
+sh "${mavenHome}/bin/mvn clean package"
+}
+/*
+stage ('ExecuteSonarQubeReport'){
+sh "${mavenHome}/bin/mvn sonar:sonar"
+}
+stage ('DeployArtifactIntoNexus'){
+sh "${mavenHome}/bin/mvn deploy"
+}
+stage ('DeployAppIntoTomcatserver'){
+sshagent(['97f3f499-4239-4dc3-83c4-44ed74518a67']) {
+sh "scp -o StrictHostKeyChecking=no target/Landmark.war ec2-user@172.31.25.205:/opt/apache-tomcat-9.0.68/webapps/"
+}
+}
+*/
+}//node closing
