@@ -4,6 +4,7 @@ echo "Job name is : ${env.JOB_NAME}"
 echo "Node name is : ${env.NODE_NAME}"
 def mavenHome = tool name:"maven3.8.6"
 try{
+sendslacknotifications("STARTED")
 stage('CheckoutCode'){
 git credentialsId: '3ea332bc-18e0-48a4-a580-fe3bf8f97850', url: 'https://github.com/bhuvaneswaribhoopal/Web-application-by-Bhuvi.git'
 }
