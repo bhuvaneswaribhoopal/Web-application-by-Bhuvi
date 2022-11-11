@@ -5,7 +5,7 @@ maven 'maven3.8.6'
 }
 parameters {
   choice choices: ['master', 'developement', 'Stage'], name: 'Branch Name'
-  string defaultValue: 'Harsha', name: 'PersonaName'
+  string defaultValue: 'Harsha', name: 'PersonName'
 }
 stages{
 stage('CheckoutCode') {
@@ -13,17 +13,18 @@ steps{
 git credentialsId: '3ea332bc-18e0-48a4-a580-fe3bf8f97850', url: 'https://github.com/bhuvaneswaribhoopal/Web-application-by-Bhuvi.git'
 }
 }
-//Run unit Test cases
-stage ('Run Test cases'){
+stage('RunTests and Build'){
 steps{
-sh "mvn test"
-}
-}
-
-stage ('Build'){
-steps{
+parallel(
+Run Tests: {
+sh "mvn clean test"
+},
+Build: {
 sh "mvn clean package"
 }
-}
+)
+}//steps closing
+}//runtest closing
+
 }//stages closing
 }//pipeline closing
